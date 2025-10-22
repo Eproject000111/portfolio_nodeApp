@@ -1,7 +1,7 @@
 const express = require('express');
-require('dotenv').config();
+require('dotenv').config(process.env.NODE_ENV === 'DEVELOPMENT' ? { path: './Environment/Dev.env' } : {path: './Environment/Prod.env'});
 const bodyParser = require('body-parser');
-// require('./Config/db.config.js').connectDB();
+require('./Config/db.config.js').connectDB();
 const contactRoute = require('./Routes/Contact.js');
 const app = express();
 
@@ -14,5 +14,11 @@ app.get("/test", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`✅ Local server running on http://localhost:${PORT}`));
+
+if(process.env.NODE_ENV !== 'PRODUCTION'){
+  app.listen(PORT, () => console.log(`✅ Local server running on http://localhost:${PORT}`));
+}
+else{
+  app.listen(PORT, () => console.log(`✅ Production server running on port ${PORT}`));
+}
 
