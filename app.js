@@ -13,9 +13,6 @@ app.get("/test", (req, res) => {
   res.send("Welcome to the Multi-API Lambda Server 🚀");
 });
 
-// 👇 Only run locally when not in AWS
-if (process.env.LOCAL) {
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => console.log(`✅ Local server running on http://localhost:${PORT}`));
-}
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`✅ Local server running on http://localhost:${PORT}`));
 
