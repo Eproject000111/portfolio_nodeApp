@@ -1,4 +1,4 @@
-const ContactModule  = require('../Models/ContactModel.js');
+const ContactModule  = require('../Models/Contact.js');
 
 exports.sendMsg = async (req, res) => {
     const { name, email, message } = req.body;
